@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Count</title>
+  <script
+    crossorigin
+    src="https://unpkg.com/react@17/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+  ></script>
+  <script
+    src="https://unpkg.com/babel-standalone@6/babel.min.js"
+  ></script>
+  <script type="text/babel">
+
+    const CounterText = (props) => {
+      return(
+        <p>{props.name}のカウント：{props.count}</p>
+      );
+    }
+
+    const INITIAL_COUNT = 0;
+
+    const Counter = (props) => {
+      const [count, setCount] = React.useState(INITIAL_COUNT);
+
+      const countAdd = () => setCount((prevCount) => prevCount + 1);
+      const countSub = () => setCount((prevCount) => prevCount - 1);
+      const countReset = () => setCount(INITIAL_COUNT);
+
+      return (
+        <div>
+          <CounterText count={count} name={props.name} />
+          <button onClick={countAdd}>ボタン +1</button>
+          <button onClick={countSub}>ボタン -1</button>
+          <button onClick={countReset}>リセット</button>
+        </div>
+      );
+    }
+
+    const domContainer = document.querySelector('#count');
+
+    ReactDOM.render(<Counter name='A'/>, domContainer);
+  </script>
+</head>
+<body>
+  <div id="count"></div>
+</body>
+</html>
