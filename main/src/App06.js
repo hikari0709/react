@@ -1,5 +1,5 @@
 const Hello = () => {
-  const isReact = false;
+  const isReact = true;
 
   // 即時関数えお利用することでJSX内にif文を書くことができる
   return (
