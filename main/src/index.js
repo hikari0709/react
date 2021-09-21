@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App06';
-import Map from './Map';
+// import App from './App06';
+// import Map from './Map';
 import Form from './InputText';
 import reportWebVitals from './reportWebVitals';
 
