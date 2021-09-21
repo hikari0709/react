@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App06';
 // import Map from './Map';
-import Form from './InputText';
+import Form from './form';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
