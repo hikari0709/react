@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App06 from './App06';
+import App from './App06';
+import Map from './Map';
+import Form from './InputText';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App06 />
+    {/* <App />
+    <Map /> */}
+    <Form />
   </React.StrictMode>,
   document.getElementById('root')
 );
