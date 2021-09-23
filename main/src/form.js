@@ -79,17 +79,71 @@ const RadioItems = ({ onChange, checked }) =>
   });
 
 
-const InputRadio = () => {
-  const [checkedValue, setCheckedValue] = useState(radioValues[0]['item']);
-  const handleChangeRadio = (e) => setCheckedValue(e.target.value);
+  const InputRadio = () => {
+    const [checkedValue, setCheckedValue] = useState(radioValues[0]['item']);
+    const handleChangeRadio = (e) => setCheckedValue(e.target.value);
+
+    return (
+      <div>
+        <p>現在選択されている値：{checkedValue}</p>
+        <RadioItems onChange={handleChangeRadio} checked={checkedValue} />
+      </div>
+    );
+  };
+
+const InputCheckBox = () => {
+  // 初期値はからの配列にする
+  const [checkedValues, setCheckedValues] = useState([]);
+
+  //チェックボックスの状態を変更するための関数
+  const handleChangeCheckBox = (e) => {
+    //checkedValuesにチェックした要素が含まれているか？
+    if (checkedValues.includes(e.target.value)) {
+      setCheckedValues(
+        checkedValues.filter((checkedValue) =>
+          checkedValue !== e.target.value)
+      );
+    } else {
+      setCheckedValues([...checkedValues, e.target.value]);
+    }
+  };
 
   return (
     <div>
-      <p>現在選択されている値：{checkedValue}</p>
-      <RadioItems onChange={handleChangeRadio} checked={checkedValue} />
+      <p>
+        選択されている値：{ checkedValues.join(', ')}
+      </p>
+      <label>
+        <input
+          type='checkbox'
+          value='りんご'
+          onChange={handleChangeCheckBox}
+          checked={checkedValues.includes('りんご')}
+        />
+        りんご
+      </label>
+      <label>
+        <input
+          type='checkbox'
+          value='みかん'
+          onChange={handleChangeCheckBox}
+          checked={checkedValues.includes('みかん')}
+        />
+        みかん
+      </label>
+      <label>
+        <input
+          type='checkbox'
+          value='なし'
+          onChange={handleChangeCheckBox}
+          checked={checkedValues.includes('なし')}
+        />
+        なし
+      </label>
     </div>
   );
 };
+
 
 export default function App() {
   return (
@@ -97,6 +151,7 @@ export default function App() {
       <InputText />
       <InputSelectBox />
       <InputRadio />
+      <InputCheckBox />
     </>
   );
 };
