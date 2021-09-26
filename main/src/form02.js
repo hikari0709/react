@@ -113,26 +113,36 @@ const checkboxValues = [
     });
 
 const InputCheckBox = () => {
-  // 初期値はからの配列にする
-  const [checkedValues, setCheckedValues] = useState([]);
+  // 状態の初期値にオブジェクトを定義する
+  const [checkedValues, setCheckedValues] = useState(
+    // accとかcurってなんだろう？
+    checkboxValues.reduce((acc, cur) => {
+      acc[cur.item] = false
+      return acc
+    },
+    {})
+  );
 
-  //チェックボックスの状態を変更するための関数
+  //チェックされたプロパティの状態が更新される
+  //setCheckedValues({ ...checkedValues, [e.target.value]: e.target.checked });何が行われている？
   const handleChangeCheckBox = (e) => {
-    //checkedValuesにチェックした要素が含まれているか？
-    if (checkedValues.includes(e.target.value)) {
-      setCheckedValues(
-        checkedValues.filter((checkedValue) =>
-          checkedValue !== e.target.value)
-      );
-    } else {
-      setCheckedValues([...checkedValues, e.target.value]);
-    }
+    setCheckedValues({ ...checkedValues, [e.target.value]: e.target.checked });
   };
+
+  // Object.entries?
+  const stateOfCheckedValues = Object.entries(checkedValues).reduce(
+    (pre, [key, value]) => {
+      value && pre.push(key);
+      return pre;
+    },
+    []
+  );
+
 
   return (
     <div>
       <p>
-        選択されている値：{ checkedValues.join(', ')}
+        選択されている値：{ stateOfCheckedValues.join(', ')}
       </p>
       <CheckboxItems onChange={handleChangeCheckBox} checked={ checkedValues } />
     </div>
