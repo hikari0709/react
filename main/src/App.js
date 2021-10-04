@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Counter } from './Counter';
+import { CounterMemo } from './CounterMemo';
 import { Hello } from './Hello';
 
 const initialCount = 0;
@@ -13,35 +14,57 @@ export default function App() {
   const callbackFunction = () => {
     document.title = `${count}回クリックされました`;
 
-    return () => {
-      console.log('hoge');
-    }
+    // return () => {
+    //   console.log('hoge');
+    // }
   }
 
   useEffect(callbackFunction, [count]);
 
-  const countIncrement = () => setCount((prevCount) => prevCount + 1);
-  const countDecrement = () => setCount((prevCount) => prevCount - 1);
-  const countReset = () => setCount(initialCount);
+  // const countIncrement = () => setCount((prevCount) => prevCount + 1);
+  // const countDecrement = () => setCount((prevCount) => prevCount - 1);
+  // const countReset = () => setCount(initialCount);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
   }
 
+
+  //React.memo検証のための記述
+  const [countA, setCountA] = useState(initialCount);
+  const [countB, setCountB] = useState(initialCount);
+
+  const countIncrementA = useCallback(() => setCountA((prevCountA) => prevCountA + 1), [countA]);
+  const countIncrementB = useCallback(() => setCountB((prevCountB) => prevCountB + 1), [countB]);
+
   return (
     <>
       <Counter
-        count={count}
-        countIncrement={countIncrement}
-        countDecrement={countDecrement}
-        countReset={countReset}
-        initialCount={initialCount}
+        text='Aボタン'
+        count={countA}
+        countIncrement={countIncrementA}
       />
+      <Counter
+        text='Bボタン'
+        count={countB}
+        countIncrement={countIncrementB}
+      />
+      {/*
       <Hello
         name={name}
         handleChangeName={handleChangeName}
         initialName={initialName}
+      /> */}
+      {/* <CounterMemo
+        text='Aボタン'
+        count={countA}
       />
+      <button onClick={countIncrementA}>increment</button>
+      <CounterMemo
+        text='Bボタン'
+        count={countB}
+      />
+      <button onClick={countIncrementB}>increment</button> */}
     </>
   );
 };
