@@ -8,7 +8,6 @@ export const Counter = React.memo(({
   countReset,
   initialCount
 }) => {
-  console.log(`${text}がクリックされました`);
   return (
     <>
       <p>現在のカウント数：{count}</p>
