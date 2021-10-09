@@ -1,7 +1,7 @@
 //import React, { useEffect, useState, useCallback, useMemo } from 'react';
 //import React, { useState, useMemo } from 'react';
 //import React, { useState, useRef, useEffect } from 'react';
-import React, { createContext, useContext } from 'react';
+//import React, { createContext, useContext } from 'react';
 //import { Counter } from './Counter';
 // import { CounterMemo } from './CounterMemo';
 // import { Hello } from './Hello';
@@ -50,16 +50,20 @@ import React, { createContext, useContext } from 'react';
 //   return params * params;
 // }
 
-const ContextObj = createContext();
+// const ContextObj = createContext();
 
-const Consumer = () => {
-  const message = useContext(ContextObj);
-  console.log(message);
+// const Consumer = () => {
+//   const message = useContext(ContextObj);
+//   console.log(message);
 
-  return <p>{message}</p>;
-};
+//   return <p>{message}</p>;
+// };
 
-const message = 'React useContext';
+// const message = 'React useContext';
+
+import { Provider } from './Provider';
+import { FirstChild } from './FirstChild';
+
 
 export default function App() {
   // const [count, setCount] = useState(initialCount);
@@ -107,9 +111,12 @@ export default function App() {
 
   return (
     <>
-      <ContextObj.Provider value={message}>
+      <Provider>
+        <FirstChild />
+      </Provider>
+      {/* <ContextObj.Provider value={message}>
         <Consumer />
-      </ContextObj.Provider>
+      </ContextObj.Provider> */}
       {/* <SampleUseRef /> */}
       {/*
       <Counter
