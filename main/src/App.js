@@ -1,6 +1,7 @@
 //import React, { useEffect, useState, useCallback, useMemo } from 'react';
 //import React, { useState, useMemo } from 'react';
-import React, { useState, useRef, useEffect } from 'react';
+//import React, { useState, useRef, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
 //import { Counter } from './Counter';
 // import { CounterMemo } from './CounterMemo';
 // import { Hello } from './Hello';
@@ -8,33 +9,33 @@ import React, { useState, useRef, useEffect } from 'react';
 //const initialCount = 0;
 //const initialName = 'JavaScript';
 
-const SampleUseRef = () => {
-  const inputRef = useRef(null);
+// const SampleUseRef = () => {
+//   const inputRef = useRef(null);
 
-  const [text, setText] = useState('');
+//   const [text, setText] = useState('');
 
-  useEffect(() => {
-    console.log('レンダリング');
-  });
+//   useEffect(() => {
+//     console.log('レンダリング');
+//   });
 
-  const handleClick = () => {
-    setText(inputRef.current.value);
-  };
+//   const handleClick = () => {
+//     setText(inputRef.current.value);
+//   };
 
-  const inputReset = () => {
-    setText('');
-    inputRef.current.value = '';
-  };
+//   const inputReset = () => {
+//     setText('');
+//     inputRef.current.value = '';
+//   };
 
-  return (
-    <div>
-      <input ref={inputRef} type='text' id='target' />
-      <button onClick={handleClick}>set text</button>
-      <button onClick={inputReset}>reset</button>
-      <p>text: { text }</p>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <input ref={inputRef} type='text' id='target' />
+//       <button onClick={handleClick}>set text</button>
+//       <button onClick={inputReset}>reset</button>
+//       <p>text: { text }</p>
+//     </div>
+//   );
+// };
 
 // const square = (params) => {
 //   const data = [...Array(100).keys()];
@@ -48,6 +49,17 @@ const SampleUseRef = () => {
 
 //   return params * params;
 // }
+
+const ContextObj = createContext();
+
+const Consumer = () => {
+  const message = useContext(ContextObj);
+  console.log(message);
+
+  return <p>{message}</p>;
+};
+
+const message = 'React useContext';
 
 export default function App() {
   // const [count, setCount] = useState(initialCount);
@@ -95,7 +107,10 @@ export default function App() {
 
   return (
     <>
-      <SampleUseRef />
+      <ContextObj.Provider value={message}>
+        <Consumer />
+      </ContextObj.Provider>
+      {/* <SampleUseRef /> */}
       {/*
       <Counter
         text='Aボタン'
